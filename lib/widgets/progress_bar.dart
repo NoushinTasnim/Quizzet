@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quizzet/constants.dart';
 import 'package:quizzet/controller/quiz_controller.dart';
 
 class ProgressBar extends StatelessWidget {
@@ -30,6 +31,7 @@ class ProgressBar extends StatelessWidget {
                 padding: const EdgeInsets.all(2.0),
                 child: LayoutBuilder(
                   builder: (context, constraints) => Container(
+                    alignment: Alignment.centerRight,
                     width: constraints.maxWidth*controller.animation.value,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -56,7 +58,7 @@ class ProgressBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${(controller.animation.value *60).round()} sec',
+                        '${(controller.animation.value *kTimeout_time).round()} sec',
                         style: GoogleFonts.roboto(
                             fontSize: 14,
                             color: Color(0xffffffff),

@@ -20,31 +20,33 @@ class QuestionAnswerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuizController _controller = Get.put(QuizController());
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          QuestionCard(
-            question: question,
-            ques_no: ques_no,
-            total_ques: total_ques,),
-          SizedBox(
-            height: 20,
-          ),
-          Column(
-            children: [
-              ...List.generate(
-                  question.options.length,
-                      (index) => Option(
-                          index: index,
-                          text: question.options[index],
-                          press: () => _controller.checkAns(question, index)
-                      ),
-              ),
-            ],
-          ),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            QuestionCard(
+              question: question,
+              ques_no: ques_no,
+              total_ques: total_ques,),
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                ...List.generate(
+                    question.options.length,
+                        (index) => Option(
+                            index: index,
+                            text: question.options[index],
+                            press: () => _controller.checkAns(question, index)
+                        ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

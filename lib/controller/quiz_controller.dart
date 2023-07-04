@@ -2,6 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:quizzet/constants.dart';
 import 'package:quizzet/screens/score_board.dart';
 
 import '../models/question.dart';
@@ -14,15 +15,7 @@ with GetSingleTickerProviderStateMixin{
 
   Animation get animation => this._animation;
 
-  List<Question> _questions = sample_data
-      .map(
-        (question) => Question(
-          id: question['id'],
-          question: question['question'],
-          answer: question['answer_index'],
-          options: question['options']),
-      )
-      .toList();
+  List<Question> _questions = sample_data;
 
   List<Question> get questions => this._questions;
 
@@ -49,8 +42,8 @@ with GetSingleTickerProviderStateMixin{
 
   @override
   void onInit() {
-    _animationController = AnimationController(duration: Duration(seconds: 60),vsync: this);
-    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
+    _animationController = AnimationController(duration: Duration(seconds: kTimeout_time),vsync: this);
+    _animation = Tween<double>(begin: 1, end: 0).animate(_animationController)
         ..addListener(() {
           update();
          });

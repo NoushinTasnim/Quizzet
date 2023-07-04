@@ -67,7 +67,7 @@ class QuizScreen extends StatelessWidget {
                           onPageChanged: _questionController.updateQuesNum,
                           itemBuilder: (context, index) => QuestionAnswerCard(
                             question: _questionController.questions[index],
-                            ques_no: index + 1,
+                            ques_no: index+1,
                             total_ques: _questionController.questions.length,
                           ),
                           itemCount: _questionController.questions.length,

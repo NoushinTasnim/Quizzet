@@ -48,38 +48,41 @@ class Option extends StatelessWidget {
                 width: 2,
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Container(
-                    height: 20,
-                    width: 20,
-                    decoration: BoxDecoration(
-                        color: getRightColor() ==
-                            Colors.black.withOpacity(.75)?
-                        Colors.transparent: getRightColor(),
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: getRightColor())
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 20,
+                      width: 20,
+                      decoration: BoxDecoration(
+                          color: getRightColor() ==
+                              Colors.black.withOpacity(.75)?
+                          Colors.transparent: getRightColor(),
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(color: getRightColor())
+                      ),
+                      child: Icon(
+                          getRightColor() ==
+                              Colors.black.withOpacity(.75)?
+                          null : getRightIcon(), size: 15,
+                      ),
                     ),
-                    child: Icon(
-                        getRightColor() ==
-                            Colors.black.withOpacity(.75)?
-                        null : getRightIcon(), size: 15,
+                    SizedBox(
+                      width: 20,
                     ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    text,
-                    style: GoogleFonts.roboto(
-                      color: getRightColor(),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      text,
+                      style: GoogleFonts.roboto(
+                        color: getRightColor(),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

@@ -3,9 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quizzet/constants.dart';
 import 'package:quizzet/screens/quiz_screen.dart';
 
-class JoinScreen extends StatelessWidget {
+import '../models/question.dart';
+import '../widgets/dropdown_btn.dart';
 
+class JoinScreen extends StatefulWidget {
+  @override
+  State<JoinScreen> createState() => _JoinScreenState();
+}
+
+class _JoinScreenState extends State<JoinScreen> {
   String displayName = '';
+  int numOfQuestions = 20;
+  bool isLoading = false; // Added isLoading flag
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +54,104 @@ class JoinScreen extends StatelessWidget {
                   flex: 2,
                 ),
                 TextField(
-                  style: GoogleFonts.robotoMono(
-                    color: Colors.black,
-                  ),
+                  style: GoogleFonts.robotoMono(color: Colors.black, fontSize: 16),
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white54,
                     hintText: 'Display Name',
                     hintStyle: GoogleFonts.roboto(
-                      fontSize: 18,
+                      fontSize: 16,
                       color: Colors.black54,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onChanged: (val){
+                  onChanged: (val) {
                     displayName = val;
                   },
+                ),
+                Spacer(),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white54,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Time Per Question",
+                          style: GoogleFonts.roboto(
+                            color: Colors.black54,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Spacer(),
+                        MyDropdownButton(),
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            if (numOfQuestions > 10) numOfQuestions -= 5;
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.purple,
+                          ),
+                          child: Icon(
+                            Icons.remove,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "$numOfQuestions Questions",
+                        style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            if (numOfQuestions < 50) numOfQuestions += 5;
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.purple,
+                          ),
+                          child: Icon(
+                            Icons.add,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Spacer(),
                 Flexible(
@@ -81,22 +169,37 @@ class JoinScreen extends StatelessWidget {
                       ),
                     ),
                     child: MaterialButton(
-                      onPressed: (){
+                      onPressed: () async {
+                        setState(() {
+                          isLoading = true; // Set isLoading to true when fetching data
+                        });
+
+                        await fetchTriviaData(numOfQuestions);
+
+                        setState(() {
+                          isLoading = false; // Set isLoading to false after fetching data
+                        });
+                        print('sasasasasasas');
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => QuizScreen(),
-                            ),
-                          );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QuizScreen(),
+                          ),
+                        );
                       },
-                      child: Text(
+                      child: isLoading
+                          ? CircularProgressIndicator(
+                        backgroundColor: Colors.purple.withOpacity(0.2),
+                          color: Colors.white,
+                      ) // Show CircularProgressIndicator while isLoading is true
+                          : Text(
                         'Start Quiz',
                         style: GoogleFonts.roboto(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 1,
-                        color: Colors.white,
-                      ),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 1,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

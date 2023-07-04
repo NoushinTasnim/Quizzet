@@ -15,3 +15,5 @@ const kbgBoxDeco = BoxDecoration(
   fit: BoxFit.cover,
   ),
 );
+
+int kTimeout_time = 20;
