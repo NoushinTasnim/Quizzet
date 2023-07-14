@@ -15,6 +15,7 @@ class QuizScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -49,16 +50,13 @@ class QuizScreen extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: SafeArea(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ProgressBar(),
-                      SizedBox(
-                        height: 40,
-                      ),
                       Expanded(
                         child: PageView.builder(
                           // Block swipe to next qn

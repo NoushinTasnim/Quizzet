@@ -22,7 +22,11 @@ class QuestionAnswerCard extends StatelessWidget {
     QuizController _controller = Get.put(QuizController());
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.only(
+            bottom: 16,
+            right: 16,
+            left: 16,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
