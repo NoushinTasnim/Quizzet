@@ -16,4 +16,16 @@ const kbgBoxDeco = BoxDecoration(
   ),
 );
 
+BoxDecoration kBtnDec = BoxDecoration(
+  borderRadius: BorderRadius.circular(16),
+  gradient: LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Colors.purple,
+      Colors.deepPurple,
+    ],
+  ),
+);
+
 int kTimeout_time = 20;

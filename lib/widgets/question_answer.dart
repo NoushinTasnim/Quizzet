@@ -26,6 +26,7 @@ class QuestionAnswerCard extends StatelessWidget {
             bottom: 16,
             right: 16,
             left: 16,
+            top: 50
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

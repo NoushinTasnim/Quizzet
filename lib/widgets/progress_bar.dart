@@ -15,28 +15,26 @@ class ProgressBar extends StatelessWidget {
     return GetBuilder<QuizController>(
       init: QuizController(),
         builder: (controller){
-        return Center(
-          child: CircularPercentIndicator(
-            radius: 50,
-            lineWidth: 15,
-            percent: controller.animation.value,
-            backgroundColor: Colors.white.withOpacity(0.0),
-            arcBackgroundColor: Colors.white,
-            arcType: ArcType.HALF,
-            linearGradient: LinearGradient(
-                colors: [
-                  Colors.purple,
-                  Colors.purple.shade300,
-                ]
-            ),
-            circularStrokeCap: CircularStrokeCap.round,
-            center: Text(
-              '${(controller.animation.value *kTimeout_time).round()} sec',
-              style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500
-              ),
+        return CircularPercentIndicator(
+          radius: 50,
+          lineWidth: 15,
+          percent: controller.animation.value,
+          backgroundColor: Colors.black.withOpacity(0.0),
+          arcBackgroundColor: Colors.white,
+          arcType: ArcType.HALF,
+          linearGradient: LinearGradient(
+              colors: [
+                Colors.purple,
+                Colors.purple.shade300,
+              ]
+          ),
+          circularStrokeCap: CircularStrokeCap.round,
+          center: Text(
+            '${(controller.animation.value *kTimeout_time).round()} sec',
+            style: GoogleFonts.roboto(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.w500
             ),
           ),
         );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quizzet/constants.dart';
-import 'package:quizzet/screens/quiz_screen.dart';
-
-import '../models/question.dart';
-import '../widgets/dropdown_btn.dart';
+import 'package:quizzet/view/quiz_screen.dart';
+import '../../../models/question.dart';
+import '../widget/inc_dec_btn.dart';
+import '../widget/per_ques_time.dart';
 
 class JoinScreen extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _JoinScreenState extends State<JoinScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: Container(
         decoration: kbgBoxDeco,
         child: SafeArea(
           child: Padding(
@@ -54,7 +54,8 @@ class _JoinScreenState extends State<JoinScreen> {
                   flex: 2,
                 ),
                 TextField(
-                  style: GoogleFonts.robotoMono(color: Colors.black, fontSize: 16),
+                  style: GoogleFonts.robotoMono(
+                      color: Colors.black, fontSize: 16),
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
                     filled: true,
@@ -73,55 +74,20 @@ class _JoinScreenState extends State<JoinScreen> {
                   },
                 ),
                 Spacer(),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white54,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Colors.white,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Time Per Question",
-                          style: GoogleFonts.roboto(
-                            color: Colors.black54,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Spacer(),
-                        MyDropdownButton(),
-                      ],
-                    ),
-                  ),
-                ),
+                PerQuesTime(),
                 Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      InkWell(
+                      IncDecBtnWidget(
                         onTap: () {
                           setState(() {
                             if (numOfQuestions > 10) numOfQuestions -= 5;
                           });
                         },
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.purple,
-                          ),
-                          child: Icon(
-                            Icons.remove,
-                            size: 20,
-                          ),
-                        ),
+                        icon: Icons.remove,
                       ),
                       Text(
                         "$numOfQuestions Questions",
@@ -131,24 +97,13 @@ class _JoinScreenState extends State<JoinScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      InkWell(
+                      IncDecBtnWidget(
                         onTap: () {
                           setState(() {
                             if (numOfQuestions < 50) numOfQuestions += 5;
                           });
                         },
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.purple,
-                          ),
-                          child: Icon(
-                            Icons.add,
-                            size: 20,
-                          ),
-                        ),
+                        icon: Icons.add,
                       ),
                     ],
                   ),
@@ -157,29 +112,20 @@ class _JoinScreenState extends State<JoinScreen> {
                 Flexible(
                   child: Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.purple,
-                          Colors.deepPurple,
-                        ],
-                      ),
-                    ),
+                    decoration: kBtnDec,
                     child: MaterialButton(
                       onPressed: () async {
                         setState(() {
-                          isLoading = true; // Set isLoading to true when fetching data
+                          isLoading =
+                          true; // Set isLoading to true when fetching data
                         });
 
                         await fetchTriviaData(numOfQuestions);
 
                         setState(() {
-                          isLoading = false; // Set isLoading to false after fetching data
+                          isLoading =
+                          false; // Set isLoading to false after fetching data
                         });
-                        print('sasasasasasas');
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -187,12 +133,7 @@ class _JoinScreenState extends State<JoinScreen> {
                           ),
                         );
                       },
-                      child: isLoading
-                          ? CircularProgressIndicator(
-                        backgroundColor: Colors.purple.withOpacity(0.2),
-                          color: Colors.white,
-                      ) // Show CircularProgressIndicator while isLoading is true
-                          : Text(
+                      child: Text(
                         'Start Quiz',
                         style: GoogleFonts.roboto(
                           fontSize: 18,
@@ -204,6 +145,14 @@ class _JoinScreenState extends State<JoinScreen> {
                     ),
                   ),
                 ),
+                Spacer(),
+                if(isLoading)
+                  Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.purple.withOpacity(0.2),
+                      color: Colors.white,
+                    ),
+                  ),
                 Spacer(
                   flex: 2,
                 ),

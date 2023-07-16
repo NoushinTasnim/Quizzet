@@ -20,6 +20,7 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     QuizController _controller = Get.put(QuizController());
     return Container(
+      margin: EdgeInsets.only(top: 12.5),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quizzet/screens/join_screen.dart';
+import 'package:quizzet/view/join_view/screen/join_screen.dart';
 
 Future<void> main() async {
   runApp(const MyApp());

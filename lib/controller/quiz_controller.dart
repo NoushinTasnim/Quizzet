@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:quizzet/constants.dart';
-import 'package:quizzet/screens/score_board.dart';
+import 'package:quizzet/view/score_board.dart';
 
 import '../models/question.dart';
 

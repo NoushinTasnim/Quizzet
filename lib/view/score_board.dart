@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quizzet/controller/quiz_controller.dart';
-import 'package:quizzet/screens/join_screen.dart';
-
 import '../constants.dart';
 import '../widgets/result_widgets.dart';
 
